@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { Box, Heading, Text, VStack, useToast } from "@chakra-ui/react";
 import AppointmentCard from "../components/AppointmentCard";
 import EditAppointmentModal from "../components/EditAppointmentModal";
-import { getFilteredAppointments, getMecanics, getServices } from "../utils/api";
+import { getFilteredAppointments, getMecanics } from "../utils/api";
 import useAuthStore from "../store/authStore";
 import { handleDelete, handleEditClick, handleUpdateAppointment } from "../utils/handlers/appointmentHandlers";
+
 
 const MisCitas = () => {
   const [appointments, setAppointments] = useState([]);
@@ -13,6 +14,7 @@ const MisCitas = () => {
   const { user } = useAuthStore();
   const [mecanics, setMecanics] = useState([]);
   const [services, setServices] = useState([]);
+
   const [editingAppointment, setEditingAppointment] = useState(null);
 
   useEffect(() => {
@@ -59,29 +61,6 @@ const MisCitas = () => {
     }
   }, [user, toast]);
 
-  const onDelete = async (appointmentId) => {
-    await handleDelete(appointmentId, setAppointments, toast);
-  };
-
-  const onEdit = (appointment) => {
-    handleEditClick(appointment, setEditingAppointment);
-  };
-
-  const onUpdate = async (id, formData) => {
-    try {
-      const updatedAppointment = await handleUpdateAppointment(id, formData, setAppointments, toast, setEditingAppointment);
-      if (updatedAppointment) {
-        setAppointments((prevAppointments) =>
-          prevAppointments.map((appointment) =>
-            appointment && appointment._id === updatedAppointment._id ? { ...updatedAppointment } : appointment
-          )
-        );
-      }
-    } catch (error) {
-      console.error("Error al actualizar la cita:", error);
-    }
-  };
-
   return (
     <Box p={4}>
       <Heading as="h1" size="xl" mb={6} textAlign="center">
@@ -97,8 +76,8 @@ const MisCitas = () => {
             <AppointmentCard
               key={appointment._id}
               appointment={appointment}
-              onDelete={() => onDelete(appointment._id)} // Llamamos onDelete con el ID
-              onEdit={() => onEdit(appointment)} // Llamamos onEdit con la cita
+              onDelete={handleDelete}
+              onEdit={handleEditClick}
             />
           ))}
         </VStack>
@@ -110,7 +89,7 @@ const MisCitas = () => {
           appointment={editingAppointment}
           mecanics={mecanics}
           services={services}
-          onUpdate={onUpdate}
+          onUpdate={handleUpdateAppointment}
         />
       )}
     </Box>

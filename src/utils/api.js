@@ -102,10 +102,6 @@ export const deleteUserAdmin = async (id) => {
 }
 
 // Mecánicos
-export const getAllMecanicsAdmin = async () => {
-  const response = await api.get('/mecanic')
-  return response.data
-}
 export const createMecanicAdmin = async (mecanicData) => {
   const response = await api.post('/admin/mecanics', mecanicData)
   return response.data
@@ -122,11 +118,6 @@ export const deleteMecanicAdmin = async (id) => {
 }
 
 // Servicios
-
-export const getAllServicesAdmin = async () => {
-  const response = await api.get('/services')
-  return response.data
-}
 export const createServiceAdmin = async (serviceData) => {
   const response = await api.post('/admin/services', serviceData)
   return response.data

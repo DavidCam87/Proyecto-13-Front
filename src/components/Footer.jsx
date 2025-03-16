@@ -1,4 +1,4 @@
-import { Box, Container, Stack, Text, SimpleGrid, Link, HStack, IconButton, Heading } from '@chakra-ui/react';
+import { Box, Container, Stack, Text, SimpleGrid, Link, HStack, IconButton, Heading, useColorModeValue } from '@chakra-ui/react';
 import { FaInstagram, FaWhatsapp, FaMapMarkerAlt, FaPhone, FaFacebookSquare } from 'react-icons/fa';
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -13,7 +13,9 @@ function Footer() {
               href="https://maps.app.goo.gl/EkNQ3zbJi91q5ogx8"
               target="_blank"
               rel="noopener noreferrer"
-              _hover={{ textDecoration: 'underline' }}><FaMapMarkerAlt /> <Text>C/Alfonso XI, Gran Plaza, 5, 41005 Sevilla</Text></HStack>
+              _hover={{ textDecoration: 'underline' }}
+              aria-label="Ubicación en Google Maps"
+            ><FaMapMarkerAlt /> <Text>C/Alfonso XI, Gran Plaza, 5, 41005 Sevilla</Text></HStack>
             <HStack><FaPhone /> <Link href="tel:+34123456789">+34 635 259 873</Link></HStack>
           </Stack>
 
@@ -32,7 +34,11 @@ function Footer() {
                 icon={<FaInstagram />}
                 variant="ghost"
                 fontSize="24px"
-                _hover={{ color: "red.400" }}
+                _hover={{ color: "red.400", bg: useColorModeValue("whiteAlpha.200", "whiteAlpha.300") }}
+                as="a"
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
               />
               <IconButton
                 color={"white"}
@@ -40,7 +46,11 @@ function Footer() {
                 icon={<FaWhatsapp />}
                 variant="ghost"
                 fontSize="24px"
-                _hover={{ color: "red.400" }}
+                _hover={{ color: "red.400", bg: useColorModeValue("whiteAlpha.200", "whiteAlpha.300") }}
+                as="a"
+                href="https://wa.me/34123456789"
+                target="_blank"
+                rel="noopener noreferrer"
               />
               <IconButton
                 color={"white"}
@@ -48,7 +58,11 @@ function Footer() {
                 icon={<FaFacebookSquare />}
                 variant="ghost"
                 fontSize="24px"
-                _hover={{ color: "red.400" }}
+                _hover={{ color: "red.400", bg: useColorModeValue("whiteAlpha.200", "whiteAlpha.300") }}
+                as="a"
+                href="https://www.facebook.com/"
+                target="_blank"
+                rel="noopener noreferrer"
               />
             </HStack>
           </Stack>
@@ -61,7 +75,7 @@ function Footer() {
         </Text>
       </Container>
     </Box>
-  )
+  );
 }
 
-export default Footer
+export default Footer;

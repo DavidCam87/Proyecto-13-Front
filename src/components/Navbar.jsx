@@ -21,7 +21,14 @@ function Navbar() {
         align={'center'}
       >
         <Flex flex={{ base: 1 }} justify={'start'} align="center">
-          <Button as={RouterLink} to="/" variant={'ghost'} fontWeight={'bold'}>
+          <Button
+            as={RouterLink}
+            to="/"
+            variant={'ghost'}
+            fontWeight={'bold'}
+            aria-label="Inicio"
+            _hover={{ bg: useColorModeValue('gray.100', 'gray.700') }} // Transición al pasar el cursor
+          >
             Moto Workshop
           </Button>
         </Flex>
@@ -31,7 +38,7 @@ function Navbar() {
           onClick={onToggle}
           icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
           variant={'ghost'}
-          aria-label="Toggle Navigation"
+          aria-label="Abrir/Cerrar menú de navegación"
         />
       </Flex>
       {isOpen && <MobileNav onToggle={onToggle} />}

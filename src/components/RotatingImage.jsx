@@ -10,15 +10,12 @@ const imageUrls = [
 ];
 const MotionImage = motion.create(Image);
 
-
 const RotatingImage = ({ interval = 3000, ...rest }) => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeout(() => {
-        setIndex((prevIndex) => (prevIndex + 1) % imageUrls.length);
-      }, interval);
+      setIndex((prevIndex) => (prevIndex + 1) % imageUrls.length);
     }, interval);
     return () => clearInterval(timer);
   }, [interval]);
@@ -29,10 +26,11 @@ const RotatingImage = ({ interval = 3000, ...rest }) => {
         <MotionImage
           key={index}
           src={imageUrls[index]}
-          initial={{ opacity: 0 }}          // Imagen inicia oculta
-          animate={{ opacity: 1.5 }}           // Se anima a opacidad 1 (visible)
-          exit={{ opacity: 0 }}              // Se desvanece al salir
-          transition={{ duration: 1 }}        // Duración de 1 segundo para la transición
+          alt={`Imagen rotativa ${index + 1}`} // Agregado texto alternativo
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1 }}
           {...rest}
           style={{
             position: "absolute",

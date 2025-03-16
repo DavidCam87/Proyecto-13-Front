@@ -8,6 +8,7 @@ const useMechanics = () => {
 
   useEffect(() => {
     const fetchMechanics = async () => {
+
       try {
         const data = await getMecanics();
         setMechanics(data);

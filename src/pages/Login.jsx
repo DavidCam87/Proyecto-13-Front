@@ -45,7 +45,7 @@ function Login() {
                     <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                   </FormControl>
                 </Stack>
-                <Button type="submit" colorScheme="red" size="lg" fontSize="md">
+                <Button type="submit" colorScheme="red" size="lg" fontSize="md" isDisabled={false}>
                   Iniciar Sesión
                 </Button>
               </Stack>

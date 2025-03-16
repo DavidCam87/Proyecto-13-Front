@@ -1,22 +1,19 @@
-import { VStack, Text } from "@chakra-ui/react";
+import { Text, UnorderedList, ListItem } from "@chakra-ui/react";
+import { parseISO, format } from 'date-fns'; // Importar date-fns
 
 const parseAppointmentDate = (dateStr) => {
-  if (dateStr.includes("-")) return new Date(dateStr);
-  if (dateStr.includes("/")) {
-    const [day, month, year] = dateStr.split("/");
-    return new Date(year, month - 1, day);
-  }
-  return new Date(dateStr);
+  return parseISO(dateStr); // Usar date-fns para parsear fechas
 };
 
 const getAppointmentsForDate = (appointments, date) => {
   return appointments
     .filter((app) => {
       const appDate = parseAppointmentDate(app.date);
-      return appDate.toDateString() === date.toDateString();
+      return format(appDate, 'yyyy-MM-dd') === format(date, 'yyyy-MM-dd'); // Usar date-fns para comparar fechas
     })
     .sort((a, b) => a.startTime.localeCompare(b.startTime));
 };
+
 const TileContent = ({ date, view, appointments }) => {
   if (view !== "month") return null;
 
@@ -24,13 +21,15 @@ const TileContent = ({ date, view, appointments }) => {
   if (dayApps.length === 0) return null;
 
   return (
-    <VStack spacing={1} position="static" flexDir="row" justify="center">
+    <UnorderedList spacing={1} position="static" styleType="none" m={0} p={0}>
       {dayApps.map((app) => (
-        <Text key={app._id} fontSize="xs">
-          🔴
-        </Text>
+        <ListItem key={app._id} fontSize="xs" aria-label="Cita programada">
+          <Text as="span" color="red.500">
+            ●
+          </Text>
+        </ListItem>
       ))}
-    </VStack>
+    </UnorderedList>
   );
 };
 

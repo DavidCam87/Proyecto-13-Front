@@ -1,8 +1,6 @@
-import { Box, Heading, Text, Stack, Button } from '@chakra-ui/react'
-import { Link as RouterLink } from 'react-router-dom'
-import RotatingImage from './RotatingImage'
-
-
+import { Box, Heading, Text, Stack, Button, useColorModeValue } from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
+import RotatingImage from './RotatingImage';
 
 export const HeroSection = ({ titleParts, subtitle, description, buttons }) => {
   return (
@@ -12,7 +10,6 @@ export const HeroSection = ({ titleParts, subtitle, description, buttons }) => {
       py={{ base: 20, md: 28 }}
       direction={{ base: 'column', md: 'row' }}
     >
-
       <Stack flex={1} spacing={{ base: 5, md: 10 }}>
         <Heading lineHeight={1.1} fontWeight={600} fontSize={{ base: '3xl', sm: '4xl', lg: '6xl' }}>
           {titleParts.map((text, index) => (
@@ -34,6 +31,8 @@ export const HeroSection = ({ titleParts, subtitle, description, buttons }) => {
               fontWeight={'normal'}
               px={6}
               colorScheme={button.colorScheme}
+              aria-label={button.ariaLabel || button.text} // Agregado aria-label
+              _hover={{ bg: useColorModeValue(`${button.colorScheme}.100`, `${button.colorScheme}.600`) }} // Transición al pasar el cursor
             >
               {button.text}
             </Button>
@@ -44,5 +43,5 @@ export const HeroSection = ({ titleParts, subtitle, description, buttons }) => {
         <RotatingImage />
       </Box>
     </Stack>
-  )
-}
+  );
+};

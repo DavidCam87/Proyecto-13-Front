@@ -1,9 +1,10 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import useAuthStore from "../store/authStore";
-import { Spinner, Center } from "@chakra-ui/react";
+import { Spinner, Center, Alert, AlertIcon } from "@chakra-ui/react"; // Importar Alert
 
 const ProtectedRoute = ({ children }) => {
-  const { isAuthenticated, isLoading } = useAuthStore();
+  const { isAuthenticated, isLoading, error } = useAuthStore(); // Obtener error
+  const location = useLocation();
 
   if (isLoading) {
     return (
@@ -13,8 +14,17 @@ const ProtectedRoute = ({ children }) => {
     );
   }
 
+  if (error) {
+    return (
+      <Alert status="error">
+        <AlertIcon />
+        Error al cargar la autenticación.
+      </Alert>
+    );
+  }
+
   if (!isAuthenticated) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/login" state={{ from: location }} replace />; // Pasar estado
   }
   return children;
 };

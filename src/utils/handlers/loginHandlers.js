@@ -9,6 +9,16 @@ export const useAuthHandlers = () => {
 
   const handleSubmit = async (e, email, password) => {
     e.preventDefault();
+    if (!email || !password) {
+      toast({
+        title: "Error",
+        description: "Por favor, ingrese un email y una contraseña.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
     try {
       await login({ email, password });
       navigate("/");

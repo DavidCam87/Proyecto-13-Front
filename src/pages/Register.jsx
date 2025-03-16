@@ -4,6 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import MotionBox from '../components/MotionBox';
 import useRegisterHandlers from '../utils/handlers/registerHandlers';
 
+
 function Register() {
   const [formData, setFormData] = useState({
     name: '',
@@ -11,8 +12,6 @@ function Register() {
     password: '',
   });
   const [isLoading, setIsLoading] = useState(false);
-
-  // Utiliza el custom hook para obtener los handlers
   const { handleChange, handleSubmit } = useRegisterHandlers(formData, setFormData, setIsLoading);
 
   const containerVariants = {
@@ -82,6 +81,7 @@ function Register() {
                   size="lg"
                   fontSize="md"
                   isLoading={isLoading}
+                  isDisabled={isLoading}
                 >
                   Registrarse
                 </Button>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { getServices } from '../api';
@@ -14,26 +14,27 @@ const useServicesHandlers = () => {
   const toast = useToast();
 
   // Cargar los servicios desde la API
-  useEffect(() => {
-    const fetchServicesData = async () => {
-      try {
-        const data = await getServices();
-        setServices(data);
-      } catch (error) {
-        toast({
-          title: 'Error',
-          description: 'Failed to load services',
-          status: 'error',
-          duration: 3000,
-          isClosable: true,
-        });
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchServicesData();
+  const fetchServicesData = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const data = await getServices();
+      setServices(data);
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'Failed to load services',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    } finally {
+      setIsLoading(false);
+    }
   }, [toast]);
+
+  useEffect(() => {
+    fetchServicesData();
+  }, [fetchServicesData]);
 
   // Handler para seleccionar un servicio y navegar a la cita
   const handleServiceSelect = (service) => {

@@ -1,3 +1,4 @@
+import { useToast } from "@chakra-ui/react";
 import { deleteAppointment, updateAppointment } from "../api";
 
 export const handleDelete = async (appointmentId, setAppointments, toast) => {

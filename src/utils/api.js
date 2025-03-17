@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'proyecto-13-back-six.vercel.app',
+  baseURL: 'https://proyecto-13-back-rho.vercel.app/',
 })
 
 // Agrega el token a cada request si existe

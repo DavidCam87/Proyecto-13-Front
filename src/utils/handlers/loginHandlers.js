@@ -31,7 +31,7 @@ export const useAuthHandlers = () => {
     } catch (err) {
       toast({
         title: "Error",
-        description: error || "Ocurrió un error durante el login",
+        description: error.response?.data?.message || "Ocurrió un error durante el login",
         status: "error",
         duration: 3000,
         isClosable: true,

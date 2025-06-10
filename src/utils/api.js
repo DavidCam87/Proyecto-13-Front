@@ -1,10 +1,9 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'https://proyecto-13-back-delta.vercel.app/api/v1',
+  baseURL: 'https://proyecto-13-back-delta.vercel.app/api/v1'//https://proyecto-13-back-delta.vercel.app/api/v1  http://localhost:3000/api/v1/
 })
 
-// Agrega el token a cada request si existe
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token')
   if (token) {
@@ -35,6 +34,13 @@ export const login = async (credentials) => {
 export const register = async (userData) => {
   const response = await api.post('/user/register', userData)
   return response.data
+}
+
+export const updateUser = (id, data) => {
+  return api.put(`/perfil/users/${id}`, data)
+}
+export const deleteUser = (id) => {
+  return api.delete(`/perfil/users/${id}`)
 }
 
 export const getServices = async () => {
@@ -69,6 +75,17 @@ export const getFilteredAppointments = async (filters) => {
 
 // NUEVAS FUNCIONES ADMIN
 
+//Export-Import
+
+export const importExcel = async (file) => {
+  const response = await api.post('/admin/import-excel', file)
+  return response.data
+}
+export const exportExcel = async () => {
+  const response = await api.get('/admin/export-excel')
+  return response.data
+}
+
 // Citas (Appointments)
 export const getAllAppointmentsAdmin = async () => {
   const response = await api.get('/admin/appointments')
@@ -86,6 +103,7 @@ export const deleteAppointmentAdmin = async (id) => {
 }
 
 // Usuarios
+
 export const getAllUsersAdmin = async () => {
   const response = await api.get('/admin/users')
   return response.data

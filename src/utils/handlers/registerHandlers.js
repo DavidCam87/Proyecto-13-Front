@@ -1,6 +1,6 @@
 import { useToast } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
-import { register } from '../api';
+import { register as apiRegister } from '../api';
 import useAuthStore from '../../store/authStore';
 
 const useRegisterHandlers = (formData, setFormData, setIsLoading) => {
@@ -19,28 +19,45 @@ const useRegisterHandlers = (formData, setFormData, setIsLoading) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+
     try {
-      await register(formData);
-      // Loguea al usuario tras el registro exitoso
-      await login({
-        email: formData.email,
-        password: formData.password,
-      });
-      navigate('/');
+      const resp = await apiRegister(formData);
       toast({
-        title: 'Registro exitoso',
+        title: 'Éxito',
+        description: resp.message,
         status: 'success',
         duration: 3000,
         isClosable: true,
       });
-    } catch (err) {
-      toast({
-        title: 'Error',
-        description: err.response?.data?.message || 'Ocurrió un error durante el registro',
-        status: 'error',
-        duration: 3000,
-        isClosable: true,
+
+      await login({
+        email: formData.email,
+        password: formData.password,
       });
+
+      navigate('/');
+    } catch (err) {
+      const resp = err.response?.data;
+
+      if (Array.isArray(resp?.errors)) {
+        resp.errors.forEach(({ msg }) =>
+          toast({
+            title: 'Error de validación',
+            description: msg,
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          })
+        );
+      } else {
+        toast({
+          title: 'Error',
+          description: resp?.message || 'Ocurrió un error durante el registro',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        });
+      }
     } finally {
       setIsLoading(false);
     }

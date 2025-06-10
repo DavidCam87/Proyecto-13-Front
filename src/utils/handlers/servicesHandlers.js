@@ -13,7 +13,7 @@ const useServicesHandlers = () => {
   const navigate = useNavigate();
   const toast = useToast();
 
-  // Cargar los servicios desde la API
+  // Se cargan los servicios desde la API
   const fetchServicesData = useCallback(async () => {
     setIsLoading(true);
     try {
@@ -36,7 +36,6 @@ const useServicesHandlers = () => {
     fetchServicesData();
   }, [fetchServicesData]);
 
-  // Handler para seleccionar un servicio y navegar a la cita
   const handleServiceSelect = (service) => {
     if (!isAuthenticated) {
       toast({
@@ -52,7 +51,6 @@ const useServicesHandlers = () => {
     navigate('/appointment', { state: { selectedService: service } });
   };
 
-  // Handlers para abrir y cerrar el modal de detalles
   const openModal = (service) => {
     setSelectedServiceDetails(service);
     setIsModalOpen(true);

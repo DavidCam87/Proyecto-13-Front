@@ -25,7 +25,7 @@ function ServiceCard({ service, onSelect, onViewDetails }) {
             colorScheme="red"
             variant="outline"
             aria-label={`Coger cita para ${service.name}`}
-            _hover={{ bg: 'red.100' }} // Transición al pasar el cursor
+            _hover={{ bg: 'red.100' }}
           >
             Coger Cita
           </Button>
@@ -35,7 +35,7 @@ function ServiceCard({ service, onSelect, onViewDetails }) {
             colorScheme="blue"
             variant="outline"
             aria-label={`Ver detalles de ${service.name}`}
-            _hover={{ bg: 'blue.100' }} // Transición al pasar el cursor
+            _hover={{ bg: 'blue.100' }}
           >
             Ver Detalles
           </Button>

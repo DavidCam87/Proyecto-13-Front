@@ -19,7 +19,7 @@ export const handleSubmit = (e, formData, toast) => { // Asegúrate de que toast
   });
 };
 
-export const handleWhatsApp = (toast) => { // Asegúrate de que toast esté aquí
+export const handleWhatsApp = (toast) => {
   const phone = "1234567890";
   const message = "Hola, me gustaría contactar con ustedes.";
   window.open(

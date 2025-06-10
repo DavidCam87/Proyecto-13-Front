@@ -6,6 +6,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Services from './pages/Services'
 import MisCitas from './pages/MisCitas'
+import PerfilPage from './pages/PerfilPage';
 import Appointment from './pages/Appointment'
 import Calendario from './pages/Calendario'
 import AdminDashboard from './pages/AdminDashboard'
@@ -25,6 +26,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/appointment" element={<ProtectedRoute><Appointment /></ProtectedRoute>} />
         <Route path="/mis-citas" element={<ProtectedRoute><MisCitas /></ProtectedRoute>} />
+        <Route path="/perfil" element={<ProtectedRoute><PerfilPage /></ProtectedRoute>} />
         <Route path="/calendario" element={<ProtectedRoute><AdminRoute><Calendario /></AdminRoute></ProtectedRoute>} />
         <Route path="/admin-dashboard" element={<ProtectedRoute><AdminRoute><AdminDashboard /></AdminRoute></ProtectedRoute>} />
       </Routes>

@@ -6,6 +6,7 @@ import AdminAppointments from '../components/adminComponents/AdminAppointments';
 import AdminUsers from '../components/adminComponents/AdminUsers';
 import AdminMechanics from '../components/adminComponents/AdminMechanics';
 import AdminServices from '../components/adminComponents/AdminServices';
+import AdminImportExport from '../components/adminComponents/AdminImportExport';
 
 const AdminDashboard = () => {
   const [appointments, setAppointments] = useState([]);
@@ -42,6 +43,7 @@ const AdminDashboard = () => {
             <Tab>Usuarios</Tab>
             <Tab>Mecánicos</Tab>
             <Tab>Servicios</Tab>
+            <Tab>Importar / Exportar</Tab>
           </TabList>
           <TabPanels>
             <TabPanel>
@@ -77,6 +79,9 @@ const AdminDashboard = () => {
                 onEdit={handleService.edit}
                 onDelete={handleService.delete}
               />
+            </TabPanel>
+            <TabPanel>
+              <AdminImportExport />
             </TabPanel>
           </TabPanels>
         </Tabs>

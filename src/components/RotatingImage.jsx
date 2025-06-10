@@ -26,7 +26,7 @@ const RotatingImage = ({ interval = 3000, ...rest }) => {
         <MotionImage
           key={index}
           src={imageUrls[index]}
-          alt={`Imagen rotativa ${index + 1}`} // Agregado texto alternativo
+          alt={`Imagen rotativa ${index + 1}`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useAuthStore from "../../store/authStore";
 
 export const useAuthHandlers = () => {
-  const { login, error } = useAuthStore();
+  const loginStore = useAuthStore((state) => state.login);
   const navigate = useNavigate();
   const toast = useToast();
 
@@ -20,18 +20,19 @@ export const useAuthHandlers = () => {
       return;
     }
     try {
-      await login({ email, password });
-      navigate("/");
+      await loginStore({ email, password });
       toast({
         title: "Login correcto",
         status: "success",
         duration: 3000,
         isClosable: true,
       });
+      navigate("/");
     } catch (err) {
+
       toast({
         title: "Error",
-        description: error.response?.data?.message || "Ocurrió un error durante el login",
+        description: err.response?.data?.message || "Ocurrió un error durante el login",
         status: "error",
         duration: 3000,
         isClosable: true,

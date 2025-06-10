@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Box, Heading, Text, VStack, useToast } from "@chakra-ui/react";
+import { Box, Image, Heading, Text, VStack, useToast } from "@chakra-ui/react";
 import AppointmentCard from "../components/AppointmentCard";
 import EditAppointmentModal from "../components/EditAppointmentModal";
 import { getFilteredAppointments, getMecanics, getServices } from "../utils/api";
@@ -83,22 +83,27 @@ const MisCitas = () => {
   };
 
   return (
-    <Box p={4}>
+    <Box p={4} minH="70vh">
       <Heading as="h1" size="xl" mb={6} textAlign="center">
         Mis Citas
       </Heading>
       {appointments.length === 0 ? (
-        <Text textAlign="center" fontSize="lg">
-          No tienes citas programadas.
-        </Text>
+        <>
+          <Text textAlign="center" fontSize="lg">
+            No tienes citas programadas.
+          </Text>
+          <Box display="flex" justifyContent="center" alignItems={"center"} my={6}>
+            <Image src="public/mecanico citas.png" alt="Mecanico citas" width="50%" borderRadius={"md"} />
+          </Box>
+        </>
       ) : (
         <VStack spacing={4} align="stretch">
           {appointments.map((appointment) => (
             <AppointmentCard
               key={appointment._id}
               appointment={appointment}
-              onDelete={() => onDelete(appointment._id)} // Llamamos onDelete con el ID
-              onEdit={() => onEdit(appointment)} // Llamamos onEdit con la cita
+              onDelete={() => onDelete(appointment._id)}
+              onEdit={() => onEdit(appointment)}
             />
           ))}
         </VStack>

@@ -1,4 +1,3 @@
-// src/components/adminComponents/AdminServices.jsx
 import { Box, Heading, Text, VStack, HStack, Button, FormControl, FormLabel, Input } from '@chakra-ui/react';
 
 const AdminServices = ({ services, newService, setNewService, onAdd, onEdit, onDelete }) => {

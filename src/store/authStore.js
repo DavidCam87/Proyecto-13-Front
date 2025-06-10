@@ -32,6 +32,14 @@ const useAuthStore = create((set) => ({
   isLoading: false,
   error: null,
 
+  setUser: (freshUser) => {
+    localStorage.setItem("user", JSON.stringify(freshUser));
+    set({ user: freshUser });
+  }, setUser: (freshUser) => {
+    localStorage.setItem("user", JSON.stringify(freshUser));
+    set({ user: freshUser });
+  },
+
   login: async (credentials) => {
     set({ isLoading: true, error: null });
     try {
@@ -54,7 +62,8 @@ const useAuthStore = create((set) => ({
         isAuthenticated: false,
         user: null,
       });
-      throw new Error(errorMsg);
+
+      throw error;
     }
   },
 

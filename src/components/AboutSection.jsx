@@ -18,4 +18,4 @@ export const AboutSection = ({ title, content, image }) => (
       />
     </Flex>
   </Box>
-)
+);

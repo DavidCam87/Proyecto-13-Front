@@ -1,4 +1,3 @@
-// src/components/adminComponents/AdminUsers.jsx
 import { Box, Heading, Text, VStack, HStack, Button } from '@chakra-ui/react';
 
 const AdminUsers = ({ users, onEdit, onDelete }) => {

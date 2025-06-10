@@ -1,15 +1,4 @@
-import {
-  Box,
-  Container,
-  Heading,
-  FormControl,
-  FormLabel,
-  Select,
-  Button,
-  Stack,
-  Text,
-  Input,
-} from '@chakra-ui/react';
+import { Box, Container, Heading, FormControl, FormLabel, Select, Button, Stack, Text, Input, } from '@chakra-ui/react';
 
 const AppointmentForm = ({
   selectedService,

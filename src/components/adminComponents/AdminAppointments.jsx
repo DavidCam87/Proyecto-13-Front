@@ -1,4 +1,3 @@
-// src/components/adminComponents/AdminAppointments.jsx
 import { Box, Heading, Text, VStack, HStack, Button } from '@chakra-ui/react';
 
 const AdminAppointments = ({ appointments, onEdit, onDelete }) => {

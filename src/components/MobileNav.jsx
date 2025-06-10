@@ -18,8 +18,8 @@ const MobileNav = ({ onToggle }) => {
             variant="ghost"
             width="100%"
             onClick={onToggle}
-            aria-label={link['aria-label']} // Agregado aria-label
-            _hover={{ bg: useColorModeValue('gray.100', 'gray.700') }} // Transición al pasar el cursor
+            aria-label={link['aria-label']}
+            _hover={{ bg: useColorModeValue('gray.100', 'gray.700') }}
           >
             {link.name}
           </Button>
@@ -30,8 +30,8 @@ const MobileNav = ({ onToggle }) => {
             variant={'solid'}
             colorScheme={'red'}
             width="100%"
-            aria-label="Cerrar sesión" // Agregado aria-label
-            _hover={{ bg: 'red.600' }} // Transición al pasar el cursor
+            aria-label="Cerrar sesión"
+            _hover={{ bg: 'red.600' }}
           >
             Logout
           </Button>

@@ -1,4 +1,3 @@
-// src/components/adminComponents/AdminMechanics.jsx
 import { Box, Heading, Text, VStack, HStack, Button, FormControl, FormLabel, Input, HStack as ChakraHStack } from '@chakra-ui/react';
 
 const AdminMechanics = ({ mechanics, newMecanic, setNewMecanic, onAdd, onEdit, onDelete }) => {

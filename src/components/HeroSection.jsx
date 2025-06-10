@@ -2,7 +2,7 @@ import { Box, Heading, Text, Stack, Button, useColorModeValue } from '@chakra-ui
 import { Link as RouterLink } from 'react-router-dom';
 import RotatingImage from './RotatingImage';
 
-export const HeroSection = ({ titleParts, subtitle, description, buttons }) => {
+export const HeroSection = ({ titleParts, description, buttons }) => {
   return (
     <Stack
       align={'center'}

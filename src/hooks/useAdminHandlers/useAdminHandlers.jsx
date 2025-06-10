@@ -3,7 +3,7 @@ import { createAppointmentHandlers } from './handlers/adminAppointmentHandlers';
 import { createUserHandlers } from './handlers/userHandlers';
 import { createMecanicHandlers } from './handlers/adminMecanicHandlers';
 import { createServiceHandlers } from './handlers/adminServiceHandlers';
-import { useState } from 'react'; //Import useState
+import { useState } from 'react';
 
 export const useAdminHandlers = (stateSetters, toast) => {
   const {

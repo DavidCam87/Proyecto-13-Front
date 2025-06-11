@@ -10,13 +10,21 @@ const AdminAppointments = ({ appointments, onEdit, onDelete }) => {
           {appointments.map((app) => (
             <Box key={app._id} p={3} borderWidth="1px" borderRadius="md">
               <Heading size="sm">
-                {app.service ? app.service.name : 'Servicio No Asignado'}
+                {app.service?.name ?? 'Servicio No Asignado'}
               </Heading>
-              <Text>Cliente: {app.user.name}</Text>
-              <Text>Fecha: {app.date}</Text>
-              <Text>Hora: {app.startTime}</Text>
+              <Text>Cliente: {app.user?.name ?? 'Cliente No Registrado'}</Text>
               <Text>
-                Mecánico: {app.mecanic ? app.mecanic.name : 'Mecánico No Asignado'}
+                Fecha:{' '}
+                {app.date
+                  ? new Date(app.date).toLocaleDateString()
+                  : 'Fecha No Disponible'}
+              </Text>
+              <Text>
+                Hora:{' '}
+                {app.startTime ?? 'Hora No Disponible'}
+              </Text>
+              <Text>
+                Mecánico: {app.mecanic?.name ?? 'Mecánico No Asignado'}
               </Text>
               <HStack mt={2}>
                 <Button colorScheme="blue" onClick={() => onEdit(app)}>

@@ -1,13 +1,4 @@
-// src/components/UserProfileForm.jsx
-import {
-  Box,
-  Button,
-  Input,
-  FormControl,
-  FormLabel,
-  VStack,
-  useToast,
-} from "@chakra-ui/react";
+import { Box, Button, Input, FormControl, FormLabel, VStack, useToast, } from "@chakra-ui/react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { updateUser, deleteUser } from "../utils/apiUsers";

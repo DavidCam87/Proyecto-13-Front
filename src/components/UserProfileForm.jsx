@@ -9,16 +9,22 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { updateUser, deleteUser } from "../utils/apiUsers";
+import useAuthStore from "../store/authStore";
 
 const UserProfileForm = ({ userData, onDelete, editable = true }) => {
   const [name, setName] = useState(userData.name || "");
   const [email, setEmail] = useState(userData.email || "");
   const toast = useToast();
+  const setUser = useAuthStore((state) => state.setUser);
+  const navigate = useNavigate();
 
   const handleUpdate = async () => {
     try {
-      await updateUser(userData._id, { name, email });
+      const response = await updateUser(userData._id, { name, email });
+      const updated = response.data;        // obtenemos los datos frescos
+      setUser(updated);                     // actualizamos el store y localStorage
       toast({
         title: "Perfil actualizado.",
         status: "success",
@@ -44,7 +50,8 @@ const UserProfileForm = ({ userData, onDelete, editable = true }) => {
         duration: 3000,
         isClosable: true,
       });
-      onDelete && onDelete(userData._id);
+      onDelete && onDelete();
+      navigate("/");
     } catch {
       toast({
         title: "Error al eliminar.",

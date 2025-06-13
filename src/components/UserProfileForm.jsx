@@ -1,20 +1,24 @@
-import { Box, Button, Input, FormControl, FormLabel, VStack, useToast, } from "@chakra-ui/react";
+// src/components/UserProfileForm.jsx
+import {
+  Box,
+  Button,
+  Input,
+  FormControl,
+  FormLabel,
+  VStack,
+  useToast,
+} from "@chakra-ui/react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { updateUser, deleteUser } from "../utils/api";
-import useAuthStore from "../store/authStore";
+import { updateUser, deleteUser } from "../utils/apiUsers";
 
 const UserProfileForm = ({ userData, onDelete, editable = true }) => {
   const [name, setName] = useState(userData.name || "");
   const [email, setEmail] = useState(userData.email || "");
   const toast = useToast();
-  const setUser = useAuthStore((state) => state.setUser);
-  const navigate = useNavigate();
 
   const handleUpdate = async () => {
     try {
-      const { data: updated } = await updateUser(userData._id, { name, email });
-      setUser(updated);
+      await updateUser(userData._id, { name, email });
       toast({
         title: "Perfil actualizado.",
         status: "success",
@@ -41,7 +45,6 @@ const UserProfileForm = ({ userData, onDelete, editable = true }) => {
         isClosable: true,
       });
       onDelete && onDelete(userData._id);
-      navigate("/");
     } catch {
       toast({
         title: "Error al eliminar.",

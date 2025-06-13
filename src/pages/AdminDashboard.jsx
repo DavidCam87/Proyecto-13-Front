@@ -1,37 +1,64 @@
-import { Box, Tabs, TabList, TabPanels, Tab, TabPanel, Heading, useToast } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { useAdminHandlers } from '../hooks/useAdminHandlers/useAdminHandlers';
+import { Box, Tabs, TabList, TabPanels, Tab, TabPanel, Heading, Spinner, Center, useToast, } from '@chakra-ui/react';
 import MotionBox from '../components/MotionBox';
 import AdminAppointments from '../components/adminComponents/AdminAppointments';
 import AdminUsers from '../components/adminComponents/AdminUsers';
 import AdminMechanics from '../components/adminComponents/AdminMechanics';
 import AdminServices from '../components/adminComponents/AdminServices';
 import AdminImportExport from '../components/adminComponents/AdminImportExport';
+import { useAdminHandlers } from '../hooks/useAdminHandlers/useAdminHandlers';
 
 const AdminDashboard = () => {
   const [appointments, setAppointments] = useState([]);
   const [users, setUsers] = useState([]);
   const [mecanics, setMecanics] = useState([]);
   const [services, setServices] = useState([]);
-  const [newMecanic, setNewMecanic] = useState("");
+  const [newMecanic, setNewMecanic] = useState('');
   const [newService, setNewService] = useState({ name: '', description: '' });
+  const [loading, setLoading] = useState(true);
   const toast = useToast();
 
-  const { fetchInitialData, handleAppointment, handleUser, handleMecanic, handleService } = useAdminHandlers({
-    setAppointments,
-    setUsers,
-    setMecanics,
-    setServices
-  }, toast);
+  const {
+    fetchInitialData,
+    handleAppointment,
+    handleUser,
+    handleMecanic,
+    handleService,
+  } = useAdminHandlers(
+    { setAppointments, setUsers, setMecanics, setServices },
+    toast
+  );
 
   useEffect(() => {
-    fetchInitialData();
-  }, [toast]);
+    (async () => {
+      try {
+        await fetchInitialData();
+      } catch (error) {
+        toast({
+          title: 'Error',
+          description: 'No se pudo cargar datos iniciales',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        });
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [fetchInitialData, toast]);
 
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   };
+
+  if (loading) {
+    return (
+      <Center minH="70vh">
+        <Spinner size="xl" label="Cargando panel de administración…" />
+      </Center>
+    );
+  }
 
   return (
     <MotionBox variants={containerVariants} initial="hidden" animate="visible">

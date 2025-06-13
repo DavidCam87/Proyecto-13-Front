@@ -1,9 +1,9 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'https://proyecto-13-back-delta.vercel.app/api/v1'//https://proyecto-13-back-delta.vercel.app/api/v1
+  baseURL: 'https://proyecto-13-back-delta.vercel.app/api/v1'
 })
-
+//http://localhost:3000/api/v1   https://proyecto-13-back-delta.vercel.app/api/v1
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token')
   if (token) {
@@ -34,13 +34,6 @@ export const login = async (credentials) => {
 export const register = async (userData) => {
   const response = await api.post('/user/register', userData)
   return response.data
-}
-
-export const updateUser = (id, data) => {
-  return api.put(`/perfil/users/${id}`, data)
-}
-export const deleteUser = (id) => {
-  return api.delete(`/perfil/users/${id}`)
 }
 
 export const getServices = async () => {

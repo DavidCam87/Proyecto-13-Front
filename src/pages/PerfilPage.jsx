@@ -6,11 +6,10 @@ const PerfilPage = () => {
   const { user, logout } = useAuthStore();
 
   return (
-    <Box maxW="lg" mx="auto" mt={10} >
-      <Heading mb={6}>Mi Perfil</Heading>
+    <Box maxW="lg" mx="auto" mt={10}>
+      <Heading mb={6}>Mi perfil</Heading>
       <UserProfileForm
         userData={user}
-        token={user.token}
         onDelete={logout}
         editable={true}
       />

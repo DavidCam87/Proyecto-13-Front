@@ -1,8 +1,14 @@
-import { Box, Container, Heading, SimpleGrid, Text, Button, Stack, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter } from '@chakra-ui/react';
-import MotionBox from '../components/MotionBox';
-import useServicesHandlers from '../utils/handlers/servicesHandlers';
-import ServiceCard from '../components/ServiceCard';
-
+import {
+  Box, Container, Heading, SimpleGrid, Text, Button, Stack, Modal, ModalOverlay, ModalContent, ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  Spinner,
+  Center,
+} from "@chakra-ui/react";
+import MotionBox from "../components/MotionBox";
+import useServicesHandlers from "../utils/handlers/servicesHandlers";
+import ServiceCard from "../components/ServiceCard";
 
 function Services() {
   const {
@@ -22,8 +28,10 @@ function Services() {
 
   if (isLoading) {
     return (
-      <Container maxW="7xl" py={10}>
-        <Text>Cargando Servicios...</Text>
+      <Container maxW="7xl" py={20}>
+        <Center>
+          <Spinner size="xl" label="Cargando servicios…" />
+        </Center>
       </Container>
     );
   }
@@ -40,19 +48,24 @@ function Services() {
               Elija entre nuestra gama de servicios profesionales para motocicletas.
             </Text>
           </Box>
-          <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10}>
-            {services.map((service) => (
-              <ServiceCard
-                key={service._id}
-                service={service}
-                onSelect={handleServiceSelect}
-                onViewDetails={openModal}
-              />
-            ))}
-          </SimpleGrid>
-        </Stack>
 
-        {/* Modal para Servicios Detallados */}
+          {services.length === 0 ? (
+            <Center py={10}>
+              <Text fontSize="lg">No hay servicios disponibles en este momento.</Text>
+            </Center>
+          ) : (
+            <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10}>
+              {services.map((service) => (
+                <ServiceCard
+                  key={service._id}
+                  service={service}
+                  onSelect={handleServiceSelect}
+                  onViewDetails={openModal}
+                />
+              ))}
+            </SimpleGrid>
+          )}
+        </Stack>
         {selectedServiceDetails && (
           <Modal isOpen={isModalOpen} onClose={closeModal} isCentered size="xl">
             <ModalOverlay />
@@ -63,7 +76,7 @@ function Services() {
                 <Text mb={4}>
                   {selectedServiceDetails.details ||
                     selectedServiceDetails.description ||
-                    'Detalles disponibles próximamente.'}
+                    "Detalles disponibles próximamente."}
                 </Text>
                 {selectedServiceDetails.duration && (
                   <Text mb={2}>

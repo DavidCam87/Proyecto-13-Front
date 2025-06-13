@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { Box, Image, Heading, Text, VStack, useToast } from "@chakra-ui/react";
+import { Box, Image, Heading, Text, VStack, Spinner, Center, useToast, } from "@chakra-ui/react";
 import AppointmentCard from "../components/AppointmentCard";
 import EditAppointmentModal from "../components/EditAppointmentModal";
-import { getFilteredAppointments, getMecanics, getServices } from "../utils/api";
+import { getFilteredAppointments, getMecanics, getServices, } from "../utils/api";
 import useAuthStore from "../store/authStore";
-import { handleDelete, handleEditClick, handleUpdateAppointment } from "../utils/handlers/appointmentHandlers";
+import { handleDelete, handleEditClick, handleUpdateAppointment, } from "../utils/handlers/appointmentHandlers";
 
 const MisCitas = () => {
   const [appointments, setAppointments] = useState([]);
@@ -69,11 +69,17 @@ const MisCitas = () => {
 
   const onUpdate = async (id, formData) => {
     try {
-      const updatedAppointment = await handleUpdateAppointment(id, formData, setAppointments, toast, setEditingAppointment);
+      const updatedAppointment = await handleUpdateAppointment(
+        id,
+        formData,
+        setAppointments,
+        toast,
+        setEditingAppointment
+      );
       if (updatedAppointment) {
-        setAppointments((prevAppointments) =>
-          prevAppointments.map((appointment) =>
-            appointment && appointment._id === updatedAppointment._id ? { ...updatedAppointment } : appointment
+        setAppointments((prev) =>
+          prev.map((a) =>
+            a && a._id === updatedAppointment._id ? updatedAppointment : a
           )
         );
       }
@@ -87,27 +93,39 @@ const MisCitas = () => {
       <Heading as="h1" size="xl" mb={6} textAlign="center">
         Mis Citas
       </Heading>
-      {appointments.length === 0 ? (
-        <>
-          <Text textAlign="center" fontSize="lg">
-            No tienes citas programadas.
-          </Text>
-          <Box display="flex" justifyContent="center" alignItems={"center"} my={6}>
-            <Image src="public/mecanico citas.png" alt="Mecanico citas" width="50%" borderRadius={"md"} />
-          </Box>
-        </>
+      {loading ? (
+        <Center py={20}>
+          <Spinner size="xl" label="Cargando citas…" />
+        </Center>
       ) : (
-        <VStack spacing={4} align="stretch">
-          {appointments.map((appointment) => (
-            <AppointmentCard
-              key={appointment._id}
-              appointment={appointment}
-              onDelete={() => onDelete(appointment._id)}
-              onEdit={() => onEdit(appointment)}
-            />
-          ))}
-        </VStack>
+        (appointments.length === 0 ? (
+          <>
+            <Text textAlign="center" fontSize="lg">
+              No tienes citas programadas.
+            </Text>
+            <Center my={6}>
+              <Image
+                src="public/mecanico citas.png"
+                alt="Mecánico citas"
+                width="50%"
+                borderRadius="md"
+              />
+            </Center>
+          </>
+        ) : (
+          <VStack spacing={4} align="stretch">
+            {appointments.map((appointment) => (
+              <AppointmentCard
+                key={appointment._id}
+                appointment={appointment}
+                onDelete={() => onDelete(appointment._id)}
+                onEdit={() => onEdit(appointment)}
+              />
+            ))}
+          </VStack>
+        ))
       )}
+
       {editingAppointment && (
         <EditAppointmentModal
           isOpen={!!editingAppointment}

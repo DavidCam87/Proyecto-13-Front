@@ -105,9 +105,10 @@ const MisCitas = () => {
             </Text>
             <Center my={6}>
               <Image
-                src="https://mohabox.com/wp-content/uploads/2025/04/elevador-moto.webp"
+                src="https://images.weserv.nl/?url=mohabox.com/wp-content/uploads/2025/04/elevador-moto.webp"
                 alt="Mecánico citas"
-                width="30%"
+                boxSize="30%"
+                objectFit="contain"
                 borderRadius="md"
               />
             </Center>

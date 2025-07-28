@@ -18,18 +18,6 @@ Este proyecto es una aplicación web completa diseñada para gestionar citas en 
 * **Frontend**: React, Chakra UI
 * **Backend**: Node.js, Express.js, MongoDB
 
-## Cómo Empezar
-
-1.  Clona el repositorio: `git clone https://github.com/DavidCam87/Proyecto-13-Front.git y https://github.com/DavidCam87/Proyecto-13-Back.git`
-2.  Instala las dependencias: `npm install` o `yarn install`
-3.  Configura las variables de entorno: preguntar por ellas
-4.  Ejecuta la aplicación: `npm start` o `yarn start`
-
 ## Requisitos
 
 * Node.js y npm o yarn instalados.
-
-
-## Contribución
-
-¡Las contribuciones son bienvenidas! Si encuentras algún problema o tienes sugerencias de mejora, por favor, abre un issue o envía un pull request.

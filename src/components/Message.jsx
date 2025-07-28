@@ -21,9 +21,9 @@ const Message = ({ message, type, clearMessage, duration = 3000 }) => { // Durac
       bg={type === "error" ? "red.500" : "green.500"}
       color="white"
       boxShadow="lg"
-      aria-live="polite" // Agregado aria-live
-      aria-atomic="true" // Agregado aria-atomic
-      transition="opacity 0.3s ease-in-out" // Transición de opacidad
+      aria-live="polite"
+      aria-atomic="true"
+      transition="opacity 0.3s ease-in-out"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}

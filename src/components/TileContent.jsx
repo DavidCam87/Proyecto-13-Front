@@ -9,7 +9,7 @@ const getAppointmentsForDate = (appointments, date) => {
   return appointments
     .filter((app) => {
       const appDate = parseAppointmentDate(app.date);
-      return format(appDate, 'yyyy-MM-dd') === format(date, 'yyyy-MM-dd'); // se usa date-fns para comparar fechas
+      return format(appDate, 'yyyy-MM-dd') === format(date, 'yyyy-MM-dd');
     })
     .sort((a, b) => a.startTime.localeCompare(b.startTime));
 };

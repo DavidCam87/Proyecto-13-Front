@@ -2,7 +2,7 @@ export const handleChange = (e, setFormData, formData) => {
   setFormData({ ...formData, [e.target.name]: e.target.value });
 };
 
-export const handleSubmit = (e, formData, toast) => { // Asegúrate de que toast esté aquí
+export const handleSubmit = (e, formData, toast) => {
   e.preventDefault();
   const mailtoLink = `mailto:tu-email@example.com?subject=${encodeURIComponent(
     formData.subject
